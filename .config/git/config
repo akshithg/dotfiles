@@ -1,0 +1,63 @@
+[alias]
+  # list aliases
+  la = "!git config -l | grep alias | cut -c 7-"
+  # aliases
+  a = add
+  ap = add -p
+  c = commit --verbose
+  ca = commit -a --verbose
+  cm = commit -m
+  cam = commit -a -m
+  m = commit --amend --verbose
+  undo-commit = reset --soft HEAD~1
+  d = diff --word-diff
+  ds = diff --stat
+  dc = diff --cached
+  s = status -s
+  cp = cherry-pick
+  cl = clone
+  co = checkout
+  rao = remote add origin
+  root = rev-parse --show-toplevel
+  # list branches sorted by last modified
+  b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+  # one-line log
+  l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+  ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+  le = log --oneline --decorate
+  filelog = log -u
+
+[core]
+  excludesfile = ~/.config/git/gitignore
+  editor = vim
+
+[diff]
+  colorMoved = default
+
+[init]
+  defaultBranch = main
+
+[merge]
+  conflictstyle = diff3
+
+[url "https://github.com/"]
+  insteadOf = gh://
+
+[url "https://gist.github.com/"]
+  insteadOf = gist://
+
+[url "https://bitbucket.org/"]
+  insteadOf = bb://
+
+[user]
+  name = ag
+  email = akshith.573@gmail.com
+
+[pull]
+  ff = only
+
+[include]
+  path = ~/.config/delta/delta.gitconfig
