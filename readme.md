@@ -38,32 +38,21 @@ dotfiles push
 
 `zsh` file source order:
 
-File          | Interactive Login | Interactive Non-Login | Script
---------------|-------------------|-----------------------|-------
-/etc/zshenv   | ✓                 | ✓                     | ✓
-~/.zshenv     | ✓                 | ✓                     | ✓
-/etc/zprofile | ✓                 |                       |
-~/.zprofile   | ✓                 |                       |
-/etc/zshrc    | ✓                 | ✓                     |
-~/.zshrc      | ✓                 | ✓                     |
-/etc/zlogin   | ✓                 |                       |
-~/.zlogin     | ✓                 |                       |
-~/.zlogout    | ✓                 |                       |
-/etc/zlogout  | ✓                 |                       |
+File                 | Interactive Login | Interactive Non-Login | Script
+---------------------|-------------------|-----------------------|-------
+/etc/zshenv          | ✓                 | ✓                     | ✓
+~/.zshenv            | ✓                 | ✓                     | ✓
+/etc/zprofile        | ✓                 |                       |
+~${ZDOTDIR}/zprofile | ✓                 |                       |
+/etc/zshrc           | ✓                 | ✓                     |
+~${ZDOTDIR}/zshrc    | ✓                 | ✓                     |
+/etc/zlogin          | ✓                 |                       |
+~${ZDOTDIR}/zlogin   | ✓                 |                       |
+~${ZDOTDIR}/zlogout  | ✓                 |                       |
+/etc/zlogout         | ✓                 |                       |
 
 ## References
 
-1. <https://www.atlassian.com/git/tutorials/dotfiles>
-2. <https://wiki.archlinux.org/title/XDG_Base_Directory>
-
-## Misc
-
-```sh
-fullpath="/etc/nginx/nginx.conf"
-echo "${fullpath:t}" # nginx.conf # tail
-echo "${fullpath:h}" # /etc/nginx # head
-echo "${fullpath:r}" # /etc/nginx/nginx # root
-echo "${fullpath:e}" # conf # extension
-echo "${fullpath:a}" # /etc/nginx/nginx.conf # absolute
-echo "${fullpath:t:r}" # nginx # tail root
-```
+1. <https://github.com/rothgar/mastering-zsh>
+2. <https://www.atlassian.com/git/tutorials/dotfiles>
+3. <https://wiki.archlinux.org/title/XDG_Base_Directory>
