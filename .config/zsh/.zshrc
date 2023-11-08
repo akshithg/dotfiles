@@ -102,19 +102,20 @@ if is-at-least 5.1; then
     typeset -U path                 # keep duplicates out of the path
 
     # detect system theme
-    export _THEME_DARK="dark"
-    export _THEME_LIGHT="light"
+    export MY_THEME_DARK="dark"
+    export MY_THEME_LIGHT="light"
 
     if [[ "$OSTYPE" == "darwin"* ]]; then
         if [ -z $(defaults read -g AppleInterfaceStyle 2> /dev/null ) ]; then
-            export _THEME=$_THEME_LIGHT
+            export MY_THEME=$MY_THEME_LIGHT
         else
-            export _THEME=$_THEME_DARK
+            export MY_THEME=$MY_THEME_DARK
         fi
     # elif [[ "$OSTYPE" == "linux-gnu"* ]]; then # TODO: Add support for other OSes
     else
-        # default to dark theme
-        export _THEME=$_THEME_DARK
+        # use env var to set theme
+        # eg: ssh SetEnv MY_THEME
+        # or other means
     fi
 
     # functions
@@ -148,11 +149,8 @@ if is-at-least 5.1; then
     fi
 
     # Syntax highlighting - must be last
-    if [ $_THEME = $_THEME_DARK ]; then
-        zinit snippet https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/main/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
-    else
-        zinit snippet https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/main/themes/catppuccin_latte-zsh-syntax-highlighting.zsh
-    fi
+    [ $MY_THEME = $MY_THEME_DARK ] && zinit snippet https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/main/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
+    [ $MY_THEME = $MY_THEME_LIGHT ] && zinit snippet https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/main/themes/catppuccin_latte-zsh-syntax-highlighting.zsh
     zinit light zsh-users/zsh-syntax-highlighting
 
 else
