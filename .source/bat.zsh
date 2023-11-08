@@ -6,11 +6,6 @@ fi
 
 alias cat="bat"
 
-# check if $_THEME is set
-if [ -z ${_THEME} ]; then
-    return
-fi
-
 config_file=${XDG_CONFIG_HOME:-$HOME/.config}/bat/config
 dark_theme='--theme="Catppuccin-mocha"'
 light_theme='--theme="Catppuccin-latte"'

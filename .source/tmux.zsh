@@ -9,11 +9,6 @@ alias tl="tmux list-sessions"
 alias ta="tmux attach -t"
 alias tn="tmux new-session"
 
-# check if $_THEME is set
-if [ -z ${_THEME} ]; then
-    return
-fi
-
 config_file=${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf
 dark_theme="@catppuccin_flavour 'mocha'"
 light_theme="@catppuccin_flavour 'latte'"

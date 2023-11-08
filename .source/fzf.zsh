@@ -7,12 +7,12 @@ if ! command -v fzf >/dev/null 2>&1; then
 fi
 
 
-# check if $_THEME is set
-if [ -z ${_THEME} ]; then
+# check if $MY_THEME is set
+if [ -z ${MY_THEME} ]; then
     return
 fi
 
-if [ ${_THEME} = ${_THEME_LIGHT} ]; then
+if [ ${MY_THEME} = ${MY_THEME_LIGHT} ]; then
     export FZF_COLORS="bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39,fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78,marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
 else
     export FZF_COLORS="bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8,fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc,marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
