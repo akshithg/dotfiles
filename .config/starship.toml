@@ -11,7 +11,6 @@ $cmd_duration\
 $line_break\
 $sudo\
 $c\
-$conda\
 $golang\
 $haskell\
 $lua\
@@ -21,6 +20,7 @@ $character
 """
 
 right_format = """
+$conda\
 $docker_context
 """
 
