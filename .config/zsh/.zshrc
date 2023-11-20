@@ -115,7 +115,9 @@ if is-at-least 5.1; then
     else
         # use env var to set theme
         # eg: ssh SetEnv MY_THEME
-        # or other means
+        if [ -z $MY_THEME ]; then
+            export MY_THEME=$MY_THEME_DARK
+        fi
     fi
 
     # functions

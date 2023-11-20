@@ -8,7 +8,7 @@
   light = false
   line-numbers = true
   navigate = true       # use n and N to move between diff sections
-  side-by-side = true
+  side-by-side = false
   syntax-theme = Catppuccin-mocha
   hyperlinks = true
   hyperlinks-file-link-format = "file-line://{path}:{line}"

@@ -10,3 +10,7 @@ light_theme='syntax-theme = Catppuccin-latte'
 
 source ${HOME}/.source/switch_theme.zsh
 switch_theme >/dev/null 2>&1
+
+dark_theme='light = false'
+light_theme='light = true'
+switch_theme >/dev/null 2>&1
