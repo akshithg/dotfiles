@@ -7,11 +7,9 @@
 [delta]
   light = false
   line-numbers = true
-  navigate = true       # use n and N to move between diff sections
   side-by-side = false
   syntax-theme = Catppuccin-mocha
   hyperlinks = true
-  hyperlinks-file-link-format = "file-line://{path}:{line}"
   features = unobtrusive-line-numbers decorations navigate
 
 [delta "unobtrusive-line-numbers"]

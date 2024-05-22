@@ -132,7 +132,7 @@ format = '[$symbol]($style) '
 
 [python]
 python_binary = 'python3'
-symbol = ' '
+symbol = '($virtualenv)  '
 style = 'fg:overlay0'
 format = '[$symbol]($style) '
 

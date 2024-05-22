@@ -20,7 +20,16 @@ fi
 
 
 # commands
-if command -v fd >/dev/null 2>&1; then
+if command -v rg > /dev/null 2>&1; then
+    _fzf_compgen_path() {
+        rg --files --hidden --follow --glob "!.git/*" --line-number --with-filename --field-match-separator ' ' $1
+    }
+
+    _fzf_compgen_dir() {
+        rg --files --type d --hidden --follow --glob "!.git/*" $1
+    }
+    export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+elif command -v fd >/dev/null 2>&1; then
     _fzf_compgen_path() {
         fd --hidden --follow --exclude ".git" . $1
     }
@@ -29,6 +38,15 @@ if command -v fd >/dev/null 2>&1; then
         fd --type d --hidden --follow --exclude ".git" . $1
     }
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude ".git" . $@'
+else
+    _fzf_compgen_path() {
+        compgen -f $1
+    }
+
+    _fzf_compgen_dir() {
+        compgen -d $1
+    }
+    export FZF_DEFAULT_COMMAND='find * -path "*/\.*" -prune -o -type f -print -o -type l -print 2> /dev/null'
 fi
 
 export FZF_CTRL_T_COMMAND=${FZF_DEFAULT_COMMAND}

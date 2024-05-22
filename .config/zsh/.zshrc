@@ -111,28 +111,20 @@ if is-at-least 5.1; then
         else
             export MY_THEME=$MY_THEME_DARK
         fi
-    # elif [[ "$OSTYPE" == "linux-gnu"* ]]; then # TODO: Add support for other OSes
+    elif [[ "$OSTYPE" == "linux-gnu"* ]]; then # TODO: Add support for other OSes
+        if [ $(gsettings get org.gnome.desktop.interface gtk-theme 2> /dev/null | tr '[:upper:]' '[:lower:]') = *"dark"* ]; then
+            export MY_THEME=$MY_THEME_DARK
+        else
+            export MY_THEME=$MY_THEME_LIGHT
+        fi
     else
-        # use env var to set theme
-        # eg: ssh SetEnv MY_THEME
         if [ -z $MY_THEME ]; then
             export MY_THEME=$MY_THEME_DARK
         fi
     fi
 
-    # functions
-    command_exists() {
-        if command -v "$@" > /dev/null 2>&1 ; then
-            true
-        elif [ -d "/Applications/$@" ] ; then
-            true
-        else
-            false
-        fi
-    }
-
     # starship prompt
-    if command_exists starship; then
+    if command -v starship > /dev/null 2>&1 ; then
         eval "$(starship init zsh)"
     fi
 
