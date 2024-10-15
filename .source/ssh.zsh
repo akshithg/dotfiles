@@ -6,4 +6,4 @@ if [ -z ${SSH_AUTH_SOCK} ] ; then
 fi
 
 # add keys to agent
-ssh-add "$(ls ~/.ssh/id_* | grep -v '.pub')" > /dev/null 2>&1
+ls ~/.ssh/id_* | grep -v '.pub' | xargs ssh-add > /dev/null 2>&1
