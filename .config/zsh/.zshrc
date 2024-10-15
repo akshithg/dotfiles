@@ -112,7 +112,7 @@ if is-at-least 5.1; then
             export MY_THEME=$MY_THEME_DARK
         fi
     elif [[ "$OSTYPE" == "linux-gnu"* ]]; then # TODO: Add support for other OSes
-        if [ $(gsettings get org.gnome.desktop.interface gtk-theme 2> /dev/null | tr '[:upper:]' '[:lower:]') = *"dark"* ]; then
+        if [[ "$(gsettings get org.gnome.desktop.interface gtk-theme 2> /dev/null | tr '[:upper:]' '[:lower:]')" == *"dark"* ]]; then
             export MY_THEME=$MY_THEME_DARK
         else
             export MY_THEME=$MY_THEME_LIGHT
