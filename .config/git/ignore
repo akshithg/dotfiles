@@ -1,5 +1,9 @@
 # claude
-**/.claude/settings.local.json
+**/.claude/*.local.*
+
+# Editor #
+.vscode/
+.cursor/
 
 # Compiled source #
 *.com
@@ -25,9 +29,6 @@
 *.log
 *.sql
 *.sqlite
-
-# Editor #
-.vscode
 
 # Environment #
 .env
