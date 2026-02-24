@@ -67,10 +67,10 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Faster `compinit`
 autoload -Uz compinit
-if [ ! -f "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump" ]; then
-  compinit
+if [[ -n "${XDG_CACHE_HOME}/zsh/zcompdump"(#qN.mh+24) ]]; then
+  compinit -d "${XDG_CACHE_HOME}/zsh/zcompdump"
 else
-  compinit -C
+  compinit -C -d "${XDG_CACHE_HOME}/zsh/zcompdump"
 fi
 
 # Completion options

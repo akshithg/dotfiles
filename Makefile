@@ -6,7 +6,7 @@ define dotgit
 	git --git-dir=$(DOTFILES_DIR) --work-tree=$(HOME)
 endef
 
-.PHONY: help clone install install-brew install-rust install-python install-node install-claude install-macos install-macos-icloud update uninstall
+.PHONY: help clone install install-brew install-rust install-python install-node install-macos install-macos-icloud update uninstall
 
 .DEFAULT_GOAL := help
 
@@ -19,7 +19,6 @@ help:
 	@echo "  install-rust         Rustup + cargo tools"
 	@echo "  install-python       uv + ruff, ty, pip-audit"
 	@echo "  install-node         fnm (Homebrew) + Node 22 + pnpm"
-	@echo "  install-claude       claude + lm-studio + tob/claude-code-config"
 	@echo "  install-macos        Apply macOS defaults"
 	@echo "  install-macos-icloud Link Documents to iCloud"
 	@echo "  update               Upgrade all tools"
@@ -41,7 +40,7 @@ clone:
 	git clone https://github.com/tmux-plugins/tpm $(HOME)/.tmux/plugins/tpm 2>/dev/null || true
 	@echo "Done. Restart your shell."
 
-install: install-brew install-rust install-python install-node install-claude
+install: install-brew install-rust install-python install-node
 	@echo "All tools installed."
 
 install-brew:
@@ -49,28 +48,31 @@ install-brew:
 		/bin/bash -c "$$(curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	/opt/homebrew/bin/brew update
 	/opt/homebrew/bin/brew install \
-		actionlint \
-		ast-grep \
+		git \
+		git-delta \
+		\
+		neovim \
+		\
 		bat \
-		colima \
-		docker \
 		dust \
 		eza \
 		fd \
 		fzf \
-		git \
-		git-delta \
-		glow \
 		jq \
-		macos-trash \
-		neovim \
 		procs \
 		ripgrep \
+		vivid \
+		zoxide \
+		\
+		actionlint \
 		shellcheck \
 		shfmt \
-		vivid \
 		zizmor \
-		zoxide
+		ast-grep \
+		\
+		colima \
+		docker \
+		macos-trash
 
 install-rust:
 	@command -v rustup >/dev/null || \
@@ -88,18 +90,6 @@ install-python:
 install-node:
 	@command -v fnm >/dev/null || /opt/homebrew/bin/brew install fnm || true
 	@zsh -c 'eval "$$(fnm env)" && fnm install 22 && fnm default 22 && npm install -g pnpm'
-
-install-claude:
-	@command -v claude >/dev/null || \
-		curl -fsSL https://claude.ai/install.sh | bash
-	@command -v lms >/dev/null || \
-		curl -fsSL https://lmstudio.ai/install.sh | bash
-	pnpm install -g oxlint agent-browser
-
-	@command -v devc >/dev/null || \
-		pnpm install -g @devcontainers/cli && \
-		git clone https://github.com/trailofbits/claude-code-devcontainer ~/.claude-devcontainer && \
-		~/.claude-devcontainer/install.sh self-install
 
 install-macos:
 	@if [[ "$$(uname -s)" != "Darwin" ]]; then \
