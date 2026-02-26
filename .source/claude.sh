@@ -12,3 +12,11 @@ claude-local() {
   CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
   claude "$@"
 }
+
+claude-init() {
+  mkdir -p .claude
+  touch .claude/CLAUDE.md
+  touch .claude/settings.json
+  touch .claude/settings.local.json
+  touch .mcp.json
+}
