@@ -53,7 +53,7 @@
 	insteadOf = bb://
 
 [user]
-	name = Akshith G
+	name = Akshith Gunasekaran
 	email = akshithg@users.noreply.github.com
 	signingkey = ~/.ssh/id_ed25519.pub
 

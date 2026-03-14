@@ -20,6 +20,10 @@ macos-titlebar-style = transparent
 window-save-state = always
 window-theme = auto
 
+# Working Dir
+working-directory = home
+window-inherit-working-directory = true
+
 # Cursor
 cursor-style = bar
 cursor-style-blink = true
