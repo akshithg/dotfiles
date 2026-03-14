@@ -39,7 +39,7 @@ clipboard-paste-protection = true
 clipboard-paste-bracketed-safe = true
 
 # Performance
-scrollback-limit = 25000000
+scrollback-limit = 1000000
 
 # Quick terminal
 keybind = global:cmd+shift+space=toggle_quick_terminal

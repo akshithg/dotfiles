@@ -75,8 +75,16 @@ if command -v tree >/dev/null 2>&1; then
         --preview 'tree -C {}'"
 fi
 
+if command -v pbcopy >/dev/null 2>&1; then
+    _fzf_clip="pbcopy"
+elif command -v wl-copy >/dev/null 2>&1; then
+    _fzf_clip="wl-copy"
+elif command -v xclip >/dev/null 2>&1; then
+    _fzf_clip="xclip -selection clipboard"
+fi
+
 export FZF_CTRL_R_OPTS="
   --preview 'echo {}' --preview-window up:3:hidden:wrap
   --bind 'ctrl-/:toggle-preview'
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | ${_fzf_clip})+abort'
   --header 'Press CTRL-Y to copy command into clipboard'"

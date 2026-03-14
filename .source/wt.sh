@@ -1,4 +1,4 @@
-# bat - https://github.com/sharkdp/bat
+# wt - git worktree manager
 
 if ! command -v wt >/dev/null 2>&1; then
     return
