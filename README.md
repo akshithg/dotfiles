@@ -11,15 +11,16 @@ Bare git repo managing `$HOME` config files.
   delta/                    # diff pager
   ghostty/                  # terminal
   git/config, ignore        # git config + global gitignore
-  karabiner/
-  macos/
+  karabiner/                # keyboard remapping
+  macos/                    # macOS defaults + iCloud setup scripts
   nvim/                     # kickstart-based, as a submodule
-  tmux/                     # tmux
+  starship.toml             # prompt
+  tmux/                     # tmux + TPM plugins
   vivid/                    # LS_COLORS themes
   zsh/                      # shell config (zinit, completions, theme)
-  starship.toml             # prompt
 .source/                    # modular shell scripts sourced by .zshrc
 .ssh/                       # ssh config, authorized_keys (keys are gitignored)
+Makefile                    # bootstrap and install targets
 ```
 
 ## Setup on a new machine
@@ -43,18 +44,21 @@ dotfiles config --local status.showUntrackedFiles no
 Or use the Makefile:
 
 ```sh
-make clone          # clone bare repo + checkout + TPM
-make install        # brew + rust + python + node tools
-make install-brew   # homebrew + CLI tools (includes node)
-make install-rust   # rustup + cargo tools (prek, cargo-deny, etc.)
-make install-python # uv (from astral.sh) + ruff, ty, pip-audit
-make install-node   # pnpm + global packages
-make update         # upgrade all tools
+make clone              # clone bare repo + checkout + TPM
+make install            # brew + rust + python + node tools
+make install-brew       # homebrew + CLI tools
+make install-rust       # rustup + cargo tools (prek, cargo-deny, etc.)
+make install-python     # uv + ruff, ty, pip-audit
+make install-node       # fnm + Node 22 + pnpm
+make install-macos      # apply macOS defaults
+make install-macos-icloud # link ~/Documents to iCloud
+make update             # upgrade all tools
+make uninstall          # remove dotfiles and restore backups
 ```
 
 Homebrew, Rust, and uv are each installed from their official web installers
-(not from each other). Node comes from homebrew; pnpm and global packages
-are managed separately in `install-node`.
+(not from each other). Node is managed by fnm (installed via Homebrew); pnpm
+is installed globally via npm.
 
 ## Usage
 
@@ -71,9 +75,12 @@ dotfiles push
 
 `.zshenv` sets XDG dirs and `ZDOTDIR=$HOME/.config/zsh`, then:
 
-1. `.zshenv` — XDG paths, editor, paths for brew, rust, python, node (all shells)
-2. `.config/zsh/.zprofile` — homebrew shellenv (login shells)
-3. `.config/zsh/.zshrc` — zinit, completions, theme, sources `.source/*` (interactive)
+1. `.zshenv` — XDG paths, editor, PATH for brew, rust, python, node (all shells)
+2. `.config/zsh/.zprofile` — homebrew shellenv (login shells only)
+3. `.config/zsh/.zshrc` — zinit, completions, theme, sources `.source/*` (interactive only)
+
+Files in `.source/` are sourced alphabetically. Underscore-prefixed files
+(`_path.sh`, `_switch_theme.sh`) load first and provide helpers used by the rest.
 
 ## References
 
