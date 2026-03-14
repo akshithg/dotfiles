@@ -4,8 +4,6 @@ if ! command -v claude >/dev/null 2>&1; then
     return
 fi
 
-alias claude-yolo="claude --dangerously-skip-permissions"
-
 claude-local() {
   ANTHROPIC_BASE_URL=http://localhost:1234 \
   ANTHROPIC_AUTH_TOKEN=lmstudio \
@@ -13,10 +11,3 @@ claude-local() {
   claude "$@"
 }
 
-claude-init() {
-  mkdir -p .claude
-  touch .claude/CLAUDE.md
-  touch .claude/settings.json
-  touch .claude/settings.local.json
-  touch .mcp.json
-}
