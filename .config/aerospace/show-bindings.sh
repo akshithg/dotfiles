@@ -1,6 +1,9 @@
 #!/bin/zsh
 set -euo pipefail
 
+# Float this window once it's registered by AeroSpace
+(sleep 0.3 && aerospace layout floating) &
+
 config="${XDG_CONFIG_HOME:-$HOME/.config}/aerospace/aerospace.toml"
 
 uv run python3 -c "

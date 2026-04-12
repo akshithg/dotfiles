@@ -37,12 +37,6 @@ preset = 'qwerty'
 8 = 'secondary'
 9 = 'secondary'
 
-# Float the keybinding viewer
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-if.window-title-regex-substring = 'AeroSpace Keybindings'
-run = 'layout floating'
-
 # Auto-assign apps to workspaces
 # External monitor: 1=terminal, 2=browser, 3=editor, 4=AI, 5=research
 # Laptop: 6=comms, 7=reference
