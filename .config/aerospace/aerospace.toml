@@ -7,7 +7,7 @@ config-version = 2
 start-at-login = true
 
 after-startup-command = [
-    'exec-and-forget borders active_color=0xffcba6f7 inactive_color=0xff494d64 width=4.0',
+    'exec-and-forget apply-theme',
 ]
 
 enable-normalization-flatten-containers = true

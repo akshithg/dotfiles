@@ -89,6 +89,7 @@
 
 [include]
 	path = ~/.config/delta/delta.gitconfig
+	path = ~/.local/state/delta-theme.gitconfig
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

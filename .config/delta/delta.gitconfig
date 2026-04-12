@@ -5,7 +5,6 @@
     diffFilter = delta --color-only
 
 [delta]
-    syntax-theme = Catppuccin Mocha
     hyperlinks = true
     line-numbers = true
     navigate = true

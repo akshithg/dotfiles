@@ -84,19 +84,25 @@ ZLE_REMOVE_SUFFIX_CHARS=$' \t\n;&' # These "eat" the auto prior space after a ta
 setopt interactive_comments     # allow # comments in shell; good for copy/paste
 
 #===== theme =====#
-export MY_THEME_DARK="dark"
-export MY_THEME_LIGHT="light"
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # macOS: detect system theme
-  export MY_THEME=$(defaults read -g AppleInterfaceStyle &>/dev/null && echo "$MY_THEME_DARK" || echo "$MY_THEME_LIGHT")
-else
-  # Non-macOS: default to dark theme
-  export MY_THEME="$MY_THEME_DARK"
-fi
-[ "$MY_THEME" = "$MY_THEME_DARK" ] && zinit snippet https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/main/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
-[ "$MY_THEME" = "$MY_THEME_LIGHT" ] && zinit snippet https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/main/themes/catppuccin_latte-zsh-syntax-highlighting.zsh
+# Initial theme detection + state file generation
+source apply-theme
+
+# zsh-syntax-highlighting (loaded once; color palette set by apply-theme)
+[ "$MY_THEME" = "dark" ] && zinit snippet https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/main/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
+[ "$MY_THEME" = "light" ] && zinit snippet https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/main/themes/catppuccin_latte-zsh-syntax-highlighting.zsh
 zinit ice silent wait'1'
 zinit light zsh-users/zsh-syntax-highlighting
+
+# Live theme switching: check macOS appearance on each prompt
+_theme_precmd() {
+    local current
+    current=$(defaults read -g AppleInterfaceStyle 2>/dev/null && echo dark || echo light)
+    if [[ "$current" != "$MY_THEME" ]]; then
+        source apply-theme
+    fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _theme_precmd
 
 #===== source, path =====#
 [[ -d ~/.source ]] && for file in ~/.source/*; do [[ -f "$file" ]] && source "$file"; done

@@ -7,13 +7,6 @@ fi
 # completion
 eval "$(fzf --zsh)"
 
-# theme
-if [ "${MY_THEME}" = "${MY_THEME_LIGHT}" ]; then
-    export FZF_COLORS="bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39,fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78,marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
-else
-    export FZF_COLORS="bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8,fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc,marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-fi
-
 # commands — prefer fd (handles dirs natively), fall back to rg + find
 if command -v fd >/dev/null 2>&1; then
     _fzf_compgen_path() {
@@ -48,14 +41,7 @@ export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
 export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree ls eza"
 
-# options
-export FZF_DEFAULT_OPTS="--height 60%
-    --border rounded
-    --layout reverse
-    --color ${FZF_COLORS}
-    --prompt '∷ '
-    --pointer ▶
-    --marker ⇒"
+# FZF_DEFAULT_OPTS (with colors) is set by apply-theme
 
 if command -v bat >/dev/null 2>&1; then
     export FZF_CTRL_T_OPTS="
