@@ -37,6 +37,12 @@ preset = 'qwerty'
 8 = 'secondary'
 9 = 'secondary'
 
+# Float the keybinding viewer
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+if.window-title-regex-substring = 'AeroSpace Keybindings'
+run = 'layout floating'
+
 # Auto-assign apps to workspaces
 # External monitor: 1=terminal, 2=browser, 3=editor, 4=AI, 5=research
 # Laptop: 6=comms, 7=reference
@@ -147,6 +153,9 @@ if.app-name-regex-substring = 'Insta360'
 run = 'layout floating'
 
 [mode.main.binding]
+
+# Show keybindings (Super + /)
+cmd-alt-ctrl-slash = 'exec-and-forget open -na Ghostty.app --args -e $HOME/.config/aerospace/show-bindings.sh'
 
 # Toggle last workspace (Super + Tab)
 cmd-alt-ctrl-tab = 'workspace-back-and-forth'
