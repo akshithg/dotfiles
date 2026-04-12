@@ -196,8 +196,8 @@ cmd-alt-ctrl-d = [
     'exec-and-forget osascript -e "tell application \"System Events\" to keystroke space using command down"',
 ]
 
-# Close window (Super + Q)
-cmd-alt-ctrl-q = 'close'
+# Close window (Super + Q, Q) — double tap to confirm
+cmd-alt-ctrl-q = 'mode close'
 
 # Fullscreen toggle (Super + F)
 cmd-alt-ctrl-f = 'fullscreen'
@@ -232,3 +232,9 @@ k = 'resize height -50'
 l = 'resize width +50'
 esc = 'mode main'
 enter = 'mode main'
+
+# Super+Q enters close mode, then Q confirms, anything else cancels
+[mode.close.binding]
+cmd-alt-ctrl-q = ['close', 'mode main']
+q = ['close', 'mode main']
+esc = 'mode main'

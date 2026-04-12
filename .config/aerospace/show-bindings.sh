@@ -1,8 +1,18 @@
 #!/bin/zsh
 set -euo pipefail
 
-# Float this window once it's registered by AeroSpace
-(sleep 0.3 && aerospace layout floating) &
+# Float and center this window once it's registered by AeroSpace
+(sleep 0.3 && aerospace layout floating && sleep 0.1 && osascript -e '
+use framework "AppKit"
+set scr to current application'\''s NSScreen'\''s mainScreen()'\''s frame()
+set sw to item 1 of item 2 of scr as integer
+set sh to item 2 of item 2 of scr as integer
+set w to 800
+set h to 500
+tell application "System Events" to tell (first process whose frontmost is true)
+    set size of window 1 to {w, h}
+    set position of window 1 to {(sw - w) / 2, (sh - h) / 2}
+end tell') &
 
 config="${XDG_CONFIG_HOME:-$HOME/.config}/aerospace/aerospace.toml"
 
