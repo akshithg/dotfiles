@@ -37,6 +37,46 @@ preset = 'qwerty'
 8 = 'secondary'
 9 = 'secondary'
 
+# Auto-assign apps to workspaces
+# External monitor: 1=terminal, 2=browser, 3=editor, 4=AI, 5=research
+# Laptop: 6=comms, 7=reference
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome.beta'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'org.zotero.zotero'
+run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Obsidian'
+run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Slack'
+run = 'move-node-to-workspace 6'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Discord'
+run = 'move-node-to-workspace 6'
+
 # Auto-float utility and communication apps
 [[on-window-detected]]
 if.app-id = 'com.apple.systempreferences'
@@ -107,6 +147,9 @@ if.app-name-regex-substring = 'Insta360'
 run = 'layout floating'
 
 [mode.main.binding]
+
+# Toggle last workspace (Super + Tab)
+cmd-alt-ctrl-tab = 'workspace-back-and-forth'
 
 # Focus windows (Super + HJKL)
 cmd-alt-ctrl-h = 'focus left'
