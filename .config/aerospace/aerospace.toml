@@ -1,0 +1,108 @@
+# AeroSpace - Hyprland/Omarchy-style tiling for macOS
+# Super key = CapsLock (mapped to cmd+ctrl+alt via Karabiner)
+#   Super + key       = cmd-alt-ctrl-key
+#   Super + Shift + key = cmd-alt-ctrl-shift-key
+
+config-version = 2
+start-at-login = true
+auto-reload-config = true
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+[gaps]
+inner.horizontal = 0
+inner.vertical = 0
+outer.left = 0
+outer.bottom = 0
+outer.top = 0
+outer.right = 0
+
+[key-mapping]
+preset = 'qwerty'
+
+[mode.main.binding]
+
+# Focus windows (Super + HJKL)
+cmd-alt-ctrl-h = 'focus left'
+cmd-alt-ctrl-j = 'focus down'
+cmd-alt-ctrl-k = 'focus up'
+cmd-alt-ctrl-l = 'focus right'
+
+# Move windows (Super + Shift + HJKL)
+cmd-alt-ctrl-shift-h = 'move left'
+cmd-alt-ctrl-shift-j = 'move down'
+cmd-alt-ctrl-shift-k = 'move up'
+cmd-alt-ctrl-shift-l = 'move right'
+
+# Switch workspaces (Super + 1-9)
+cmd-alt-ctrl-1 = 'workspace 1'
+cmd-alt-ctrl-2 = 'workspace 2'
+cmd-alt-ctrl-3 = 'workspace 3'
+cmd-alt-ctrl-4 = 'workspace 4'
+cmd-alt-ctrl-5 = 'workspace 5'
+cmd-alt-ctrl-6 = 'workspace 6'
+cmd-alt-ctrl-7 = 'workspace 7'
+cmd-alt-ctrl-8 = 'workspace 8'
+cmd-alt-ctrl-9 = 'workspace 9'
+
+# Move window to workspace and follow (Super + Shift + 1-9)
+cmd-alt-ctrl-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+cmd-alt-ctrl-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+cmd-alt-ctrl-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+cmd-alt-ctrl-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+cmd-alt-ctrl-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+cmd-alt-ctrl-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+cmd-alt-ctrl-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+cmd-alt-ctrl-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+cmd-alt-ctrl-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+
+# Open terminal (Super + Enter)
+cmd-alt-ctrl-enter = 'exec-and-forget open -a Ghostty'
+
+# App launcher / Spotlight (Super + D)
+cmd-alt-ctrl-d = [
+    'exec-and-forget osascript -e "tell application \"System Events\" to keystroke space using command down"',
+]
+
+# Close window (Super + Q)
+cmd-alt-ctrl-q = 'close'
+
+# Fullscreen toggle (Super + F)
+cmd-alt-ctrl-f = 'fullscreen'
+
+# Toggle floating / tiling (Super + V)
+cmd-alt-ctrl-v = 'layout floating tiling'
+
+# Toggle split orientation (Super + E)
+cmd-alt-ctrl-e = 'layout tiles horizontal vertical'
+
+# Enter resize mode (Super + R)
+cmd-alt-ctrl-r = 'mode resize'
+
+# Reload config (Super + Shift + R)
+cmd-alt-ctrl-shift-r = 'reload-config'
+
+# Balance window sizes (Super + Shift + E)
+cmd-alt-ctrl-shift-e = 'balance-sizes'
+
+# Focus monitors (Super + comma/period)
+cmd-alt-ctrl-comma = 'focus-monitor prev'
+cmd-alt-ctrl-period = 'focus-monitor next'
+
+# Move window to monitor (Super + Shift + comma/period)
+cmd-alt-ctrl-shift-comma = 'move-node-to-monitor prev'
+cmd-alt-ctrl-shift-period = 'move-node-to-monitor next'
+
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+escape = 'mode main'
+enter = 'mode main'
