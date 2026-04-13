@@ -93,16 +93,18 @@ source apply-theme
 zinit ice silent wait'1'
 zinit light zsh-users/zsh-syntax-highlighting
 
-# Live theme switching: check macOS appearance on each prompt
-_theme_precmd() {
-    local current
-    current=$(defaults read -g AppleInterfaceStyle 2>/dev/null && echo dark || echo light)
-    if [[ "$current" != "$MY_THEME" ]]; then
-        source apply-theme
-    fi
-}
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd _theme_precmd
+# Live theme switching (macOS only): check appearance on each prompt
+if [[ -n "$IS_MACOS" ]]; then
+    _theme_precmd() {
+        local current
+        current=$(defaults read -g AppleInterfaceStyle 2>/dev/null && echo dark || echo light)
+        if [[ "$current" != "$MY_THEME" ]]; then
+            source apply-theme
+        fi
+    }
+    autoload -Uz add-zsh-hook
+    add-zsh-hook precmd _theme_precmd
+fi
 
 #===== source, path =====#
 [[ -d ~/.source ]] && for file in ~/.source/*; do [[ -f "$file" ]] && source "$file"; done

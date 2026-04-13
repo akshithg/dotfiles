@@ -4,14 +4,18 @@ if [[ "${ZSH_EVAL_CONTEXT:-}" != *:file ]]; then
     set -euo pipefail
 fi
 
-# Detect macOS appearance
-if defaults read -g AppleInterfaceStyle &>/dev/null; then
+# Detect appearance: macOS uses defaults, Linux defaults to dark
+if [[ "$(uname -s)" == "Darwin" ]] && defaults read -g AppleInterfaceStyle &>/dev/null; then
     mode="dark"
-else
+elif [[ "$(uname -s)" == "Darwin" ]]; then
     mode="light"
+else
+    mode="dark"
 fi
 
 state="${XDG_STATE_HOME:-$HOME/.local/state}"
+mkdir -p "$state"
+
 config="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 # --- State files (gitignored, read by tool configs via include) ---
@@ -38,7 +42,9 @@ if [[ "$mode" == "light" ]]; then
 else
     palette="catppuccin_mocha"
 fi
-sed "s/^palette = .*/palette = '$palette'/" "$config/starship.toml" > "$state/starship.toml"
+if [[ -f "$config/starship.toml" ]]; then
+    sed "s/^palette = .*/palette = '$palette'/" "$config/starship.toml" > "$state/starship.toml"
+fi
 
 # --- Live updates for running processes ---
 

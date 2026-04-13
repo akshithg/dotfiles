@@ -4,6 +4,13 @@
 # ✓ scripts
 # echo "loading ~/.zshenv"
 
+# Platform detection
+case "$(uname -s)" in
+    Darwin) export IS_MACOS=1 ;;
+    Linux)  export IS_LINUX=1 ;;
+esac
+[[ -f /.dockerenv || -n "${container:-}" ]] && export IS_CONTAINER=1
+
 # XDG
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_CACHE_HOME="${HOME}/.cache"
@@ -21,9 +28,10 @@ export VISUAL="nvim"
 # zsh
 export ZDOTDIR="${HOME}/.config/zsh"
 
-# homebrew (for scripts - login shells get full shellenv in .zprofile)
+# homebrew (macOS native, Linuxbrew if present)
 export HOMEBREW_NO_ANALYTICS=1
-export PATH="/opt/homebrew/bin:${PATH}"
+[[ -d /opt/homebrew/bin ]] && export PATH="/opt/homebrew/bin:${PATH}"
+[[ -d /home/linuxbrew/.linuxbrew/bin ]] && export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
 
 # rust
 export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"

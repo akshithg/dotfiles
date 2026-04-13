@@ -6,7 +6,7 @@ define dotgit
 	git --git-dir=$(DOTFILES_DIR) --work-tree=$(HOME)
 endef
 
-.PHONY: help clone install install-brew install-rust install-python install-node install-macos install-macos-icloud update uninstall
+.PHONY: help clone install install-brew install-rust install-python install-node install-macos install-macos-icloud install-linux update uninstall
 
 .DEFAULT_GOAL := help
 
@@ -21,6 +21,7 @@ help:
 	@echo "  install-node         fnm (Homebrew) + Node 22 + pnpm"
 	@echo "  install-macos        Apply macOS defaults"
 	@echo "  install-macos-icloud Link Documents to iCloud"
+	@echo "  install-linux        CLI tools via apt/dnf/pacman (Linux)"
 	@echo "  update               Upgrade all tools"
 	@echo "  uninstall            Remove dotfiles and restore backups"
 
@@ -104,6 +105,36 @@ install-macos-icloud:
 		exit 1; \
 	fi
 	zsh .config/macos/setup-icloud.sh
+
+install-linux:
+	@if [ "$$(uname -s)" != "Linux" ]; then \
+		echo "Error: Not Linux"; exit 1; \
+	fi
+	@if command -v apt-get >/dev/null; then \
+		sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+			zsh git curl ca-certificates \
+			neovim tmux \
+			ripgrep fd-find fzf bat eza zoxide \
+			jq shellcheck; \
+		[ -e /usr/bin/fdfind ] && [ ! -e /usr/local/bin/fd ] && sudo ln -sf /usr/bin/fdfind /usr/local/bin/fd; \
+		[ -e /usr/bin/batcat ] && [ ! -e /usr/local/bin/bat ] && sudo ln -sf /usr/bin/batcat /usr/local/bin/bat; \
+	elif command -v dnf >/dev/null; then \
+		sudo dnf install -y \
+			zsh git curl ca-certificates \
+			neovim tmux \
+			ripgrep fd-find fzf bat eza zoxide \
+			jq ShellCheck; \
+	elif command -v pacman >/dev/null; then \
+		sudo pacman -Sy --noconfirm --needed \
+			zsh git curl ca-certificates \
+			neovim tmux \
+			ripgrep fd fzf bat eza zoxide \
+			jq shellcheck starship git-delta; \
+	else \
+		echo "Error: no supported package manager (apt/dnf/pacman) found"; exit 1; \
+	fi
+	@command -v starship >/dev/null || curl -fsSL https://starship.rs/install.sh | sh -s -- -y
+	@command -v delta >/dev/null || echo "Note: install git-delta separately (not in apt repos)"
 
 update:
 	/opt/homebrew/bin/brew update && /opt/homebrew/bin/brew upgrade
