@@ -57,6 +57,11 @@ run = 'move-node-to-workspace 2'
 if.app-id = 'com.apple.Safari'
 run = 'move-node-to-workspace 2'
 
+# Chrome PWA: Google Drive
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome.beta.app.aghbiahbpaijignceidepookljebhfak'
+run = 'move-node-to-workspace 2'
+
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
 run = 'move-node-to-workspace 3'
@@ -79,6 +84,11 @@ run = 'move-node-to-workspace 6'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Discord'
+run = 'move-node-to-workspace 6'
+
+# Chrome PWA: Gmail
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome.beta.app.fmgjjmmmlfnkbppncabfkddbjimcfncm'
 run = 'move-node-to-workspace 6'
 
 # Auto-float utility and communication apps
@@ -148,6 +158,15 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Insta360'
+run = 'layout floating'
+
+# Chrome PWAs: Google Meet + Calendar always float
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome.beta.app.kjgfgldnnfoeklkmfkjfagphfepbbdan'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome.beta.app.kjbdgfilnfhdoflbpgamdcdgpehopbep'
 run = 'layout floating'
 
 [mode.main.binding]
