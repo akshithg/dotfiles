@@ -108,7 +108,7 @@ fi
 
 #===== source, path =====#
 [[ -d ~/.source ]] && for file in ~/.source/*; do [[ -f "$file" ]] && source "$file"; done
-alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotgit='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 typeset -U path                 # remove duplicates in $PATH
 
 #===== local =====#

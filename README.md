@@ -32,13 +32,13 @@ Prerequisites: `git`, `zsh`, macOS (homebrew-based setup).
 git clone --bare git@github.com:akshithg/dotfiles.git $HOME/.dotfiles
 
 # alias for this session
-alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotgit='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # back up any conflicting files, then checkout
 mkdir -p ~/.config-backup
-dotfiles checkout 2>&1 | grep -E "^\s" | awk '{print $1}' | xargs -I{} mv {} ~/.config-backup/{}
-dotfiles checkout
-dotfiles config --local status.showUntrackedFiles no
+dotgit checkout 2>&1 | grep -E "^\s" | awk '{print $1}' | xargs -I{} mv {} ~/.config-backup/{}
+dotgit checkout
+dotgit config --local status.showUntrackedFiles no
 ```
 
 Or use the Makefile:
@@ -62,13 +62,13 @@ is installed globally via npm.
 
 ## Usage
 
-The alias `dotfiles` is defined in `.zshrc`. After setup:
+The alias `dotgit` is defined in `.zshrc`. After setup:
 
 ```sh
-dotfiles status
-dotfiles add .config/ghostty/config
-dotfiles commit -m "update ghostty config"
-dotfiles push
+dotgit status
+dotgit add .config/ghostty/config
+dotgit commit -m "update ghostty config"
+dotgit push
 ```
 
 ## Shell loading order

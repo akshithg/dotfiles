@@ -32,4 +32,4 @@ is for manual editing — the bare repo is the source of truth deployed to `$HOM
 - Don't add shell files that run on every shell startup unless necessary. Prefer lazy loading.
 - Lint shell scripts with `shellcheck` before committing.
 - Test changes by sourcing the file directly: `source ~/.source/<file>.sh`
-- The `dotfiles` alias in `.zshrc` operates on the bare repo at `~/.dotfiles`, not this working copy.
+- The `dotgit` alias in `.zshrc` operates on the bare repo at `~/.dotfiles`, not this working copy.
