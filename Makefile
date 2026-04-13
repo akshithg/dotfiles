@@ -6,7 +6,7 @@ define dotgit
 	git --git-dir=$(DOTFILES_DIR) --work-tree=$(HOME)
 endef
 
-.PHONY: help clone install install-brew install-rust install-python install-node install-macos install-macos-icloud install-linux update uninstall
+.PHONY: help clone install install-brew install-rust install-python install-node install-macos install-macos-icloud install-linux test update uninstall
 
 .DEFAULT_GOAL := help
 
@@ -22,6 +22,7 @@ help:
 	@echo "  install-macos        Apply macOS defaults"
 	@echo "  install-macos-icloud Link Documents to iCloud"
 	@echo "  install-linux        CLI tools via apt/dnf/pacman (Linux)"
+	@echo "  test                 Build + validate dotfiles in Ubuntu/Debian/Arch containers"
 	@echo "  update               Upgrade all tools"
 	@echo "  uninstall            Remove dotfiles and restore backups"
 
@@ -135,6 +136,9 @@ install-linux:
 	fi
 	@command -v starship >/dev/null || curl -fsSL https://starship.rs/install.sh | sh -s -- -y
 	@command -v delta >/dev/null || echo "Note: install git-delta separately (not in apt repos)"
+
+test:
+	./test/run.sh
 
 update:
 	/opt/homebrew/bin/brew update && /opt/homebrew/bin/brew upgrade
