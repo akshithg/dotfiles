@@ -9,7 +9,10 @@ case "$(uname -s)" in
     Darwin) export IS_MACOS=1 ;;
     Linux)  export IS_LINUX=1 ;;
 esac
-[[ -f /.dockerenv || -n "${container:-}" ]] && export IS_CONTAINER=1
+if [[ -f /.dockerenv || -n "${container:-}" ]] \
+    || grep -qaE '(docker|containerd|kubepods)' /proc/1/cgroup 2>/dev/null; then
+    export IS_CONTAINER=1
+fi
 
 # XDG
 export XDG_CONFIG_HOME="${HOME}/.config"

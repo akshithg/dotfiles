@@ -1,4 +1,5 @@
-FROM archlinux:latest
+# Arch has no official arm64 image; emulate amd64 via qemu on Apple Silicon
+FROM --platform=linux/amd64 archlinux:latest
 
 RUN pacman -Sy --noconfirm --needed \
     zsh git curl base-devel sudo \
