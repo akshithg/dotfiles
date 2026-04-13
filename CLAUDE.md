@@ -24,7 +24,7 @@ is for manual editing — the bare repo is the source of truth deployed to `$HOM
 - **Theme**: Catppuccin mocha (dark) / latte (light) everywhere. `apply-theme` detects macOS appearance and writes theme state to `$XDG_STATE_HOME/` (delta-theme.gitconfig, tmux-theme.conf, starship.toml). Tool configs include these state files so tracked files stay clean. A zsh precmd hook calls `apply-theme` when appearance changes.
 - **XDG compliance**: Configs go in `$XDG_CONFIG_HOME`, caches in `$XDG_CACHE_HOME`, data in `$XDG_DATA_HOME`, state in `$XDG_STATE_HOME`. Never hardcode `~/.config` when a variable exists.
 - **Dependencies**: Homebrew for CLI tools, rustup for Rust, uv for Python, fnm for Node. Each installed from its official installer, not from each other.
-- **nvim**: Submodule (kickstart.nvim). Don't edit nvim config in this repo — it has its own git history.
+- **nvim**: LazyVim distribution, tracked inline at `.config/nvim/`. Customize via `lua/plugins/` and `lua/config/`. Run `:LazyExtras` to enable language support modules.
 
 ## When editing
 
