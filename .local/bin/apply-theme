@@ -1,5 +1,8 @@
 #!/bin/zsh
-set -euo pipefail
+# Only strict mode when executed, not when sourced (sourcing would poison the shell)
+if [[ "${ZSH_EVAL_CONTEXT:-}" != *:file ]]; then
+    set -euo pipefail
+fi
 
 # Detect macOS appearance
 if defaults read -g AppleInterfaceStyle &>/dev/null; then
