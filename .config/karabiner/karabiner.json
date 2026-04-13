@@ -85,6 +85,24 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Super + D = Spotlight (Cmd+Space)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": { "mandatory": ["right_command", "right_control", "right_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },

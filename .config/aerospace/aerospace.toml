@@ -7,7 +7,7 @@ config-version = 2
 start-at-login = true
 
 after-startup-command = [
-    'exec-and-forget apply-theme',
+    'exec-and-forget $HOME/.local/bin/apply-theme',
 ]
 
 enable-normalization-flatten-containers = true
@@ -195,10 +195,7 @@ cmd-alt-ctrl-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 # Open terminal (Super + Enter)
 cmd-alt-ctrl-enter = 'exec-and-forget open -a Ghostty'
 
-# App launcher / Spotlight (Super + D)
-cmd-alt-ctrl-d = [
-    'exec-and-forget osascript -e "tell application \"System Events\" to keystroke space using command down"',
-]
+# Super + D = Spotlight (handled in Karabiner — exec-and-forget osascript is blocked by macOS sandbox)
 
 # Close window (Super + Q, Q) — double tap to confirm
 cmd-alt-ctrl-q = 'mode close'
