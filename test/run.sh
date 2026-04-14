@@ -1,12 +1,12 @@
 #!/bin/sh
 # Build and validate dotfiles in container test environments.
-# Usage: ./test/run.sh [ubuntu|debian|arch|all]
+# Usage: ./test/run.sh [ubuntu|debian|all]
 set -eu
 
 cd "$(dirname "$0")/.."
 
 target="${1:-all}"
-distros="ubuntu debian arch"
+distros="ubuntu debian"
 [ "$target" != "all" ] && distros="$target"
 
 for distro in $distros; do

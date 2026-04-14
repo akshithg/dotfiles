@@ -22,7 +22,7 @@ help:
 	@echo "  install-macos        Apply macOS defaults"
 	@echo "  install-macos-icloud Link Documents to iCloud"
 	@echo "  install-linux        CLI tools via apt/dnf/pacman (Linux)"
-	@echo "  test                 Build + validate dotfiles in Ubuntu/Debian/Arch containers"
+	@echo "  test                 Build + validate dotfiles in Ubuntu/Debian containers"
 	@echo "  update               Upgrade all tools"
 	@echo "  uninstall            Remove dotfiles and restore backups"
 
