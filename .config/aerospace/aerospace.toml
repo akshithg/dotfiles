@@ -176,13 +176,24 @@ run = 'move-node-to-workspace 7'
 
 [mode.main.binding]
 
-# Show keybindings (Super + /)
-cmd-alt-ctrl-slash = 'exec-and-forget open -na Ghostty.app --args -e $HOME/.config/aerospace/show-bindings.sh'
+# ── Tiling (matches Omarchy v2 tiling-v2.conf) ──
 
-# Toggle last workspace (Super + Tab)
-cmd-alt-ctrl-tab = 'workspace-back-and-forth'
+# Close window (Super + W)
+cmd-alt-ctrl-w = 'close'
 
-# Focus windows (Super + HJKL)
+# Toggle floating / tiling (Super + T)
+cmd-alt-ctrl-t = 'layout floating tiling'
+
+# Fullscreen (Super + F)
+cmd-alt-ctrl-f = 'fullscreen'
+
+# Toggle split orientation (Super + E)
+cmd-alt-ctrl-e = 'layout tiles horizontal vertical'
+
+# Balance window sizes (Super + Shift + E)
+cmd-alt-ctrl-shift-e = 'balance-sizes'
+
+# Focus windows (Super + HJKL — macOS adaptation of Omarchy arrow keys)
 cmd-alt-ctrl-h = 'focus left'
 cmd-alt-ctrl-j = 'focus down'
 cmd-alt-ctrl-k = 'focus up'
@@ -193,6 +204,10 @@ cmd-alt-ctrl-shift-h = 'move left'
 cmd-alt-ctrl-shift-j = 'move down'
 cmd-alt-ctrl-shift-k = 'move up'
 cmd-alt-ctrl-shift-l = 'move right'
+
+# Resize (Super + -/=, matches Omarchy direct resize)
+cmd-alt-ctrl-minus = 'resize smart -50'
+cmd-alt-ctrl-equal = 'resize smart +50'
 
 # Switch workspaces (Super + 1-9)
 cmd-alt-ctrl-1 = 'workspace 1'
@@ -216,31 +231,9 @@ cmd-alt-ctrl-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
 cmd-alt-ctrl-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 cmd-alt-ctrl-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 
-# Open terminal (Super + Enter)
-cmd-alt-ctrl-enter = 'exec-and-forget open -a Ghostty'
-
-# Super + D = Spotlight (handled in Karabiner — exec-and-forget osascript is blocked by macOS sandbox)
-
-# Close window (Super + Q, Q) — double tap to confirm
-cmd-alt-ctrl-q = 'mode close'
-
-# Fullscreen toggle (Super + F)
-cmd-alt-ctrl-f = 'fullscreen'
-
-# Toggle floating / tiling (Super + V)
-cmd-alt-ctrl-v = 'layout floating tiling'
-
-# Toggle split orientation (Super + E)
-cmd-alt-ctrl-e = 'layout tiles horizontal vertical'
-
-# Enter resize mode (Super + R)
-cmd-alt-ctrl-r = 'mode resize'
-
-# Reload config (Super + Shift + R)
-cmd-alt-ctrl-shift-r = 'reload-config'
-
-# Balance window sizes (Super + Shift + E)
-cmd-alt-ctrl-shift-e = 'balance-sizes'
+# Workspace navigation (Super + Tab/Shift+Tab/Ctrl+Tab, matches Omarchy v2)
+cmd-alt-ctrl-tab = 'workspace next'
+cmd-alt-ctrl-shift-tab = 'workspace prev'
 
 # Focus monitors (Super + comma/period)
 cmd-alt-ctrl-comma = 'focus-monitor prev'
@@ -250,16 +243,33 @@ cmd-alt-ctrl-period = 'focus-monitor next'
 cmd-alt-ctrl-shift-comma = 'move-node-to-monitor prev'
 cmd-alt-ctrl-shift-period = 'move-node-to-monitor next'
 
-[mode.resize.binding]
-h = 'resize width -50'
-j = 'resize height +50'
-k = 'resize height -50'
-l = 'resize width +50'
-esc = 'mode main'
-enter = 'mode main'
+# ── App launchers (matches Omarchy bindings.conf) ──
 
-# Super+Q enters close mode, then Q confirms, anything else cancels
-[mode.close.binding]
-cmd-alt-ctrl-q = ['close', 'mode main']
-q = ['close', 'mode main']
-esc = 'mode main'
+# Terminal (Super + Enter)
+cmd-alt-ctrl-enter = 'exec-and-forget open -a Ghostty'
+
+# Browser (Super + B)
+cmd-alt-ctrl-b = 'exec-and-forget open -a "Google Chrome Beta"'
+
+# Neovim (Super + N)
+cmd-alt-ctrl-n = 'exec-and-forget open -na Ghostty.app --args -e nvim'
+
+# Lazydocker (Super + D)
+cmd-alt-ctrl-d = 'exec-and-forget open -na Ghostty.app --args -e lazydocker'
+
+# Messenger / Slack (Super + G)
+cmd-alt-ctrl-g = 'exec-and-forget open -a Slack'
+
+# Obsidian (Super + O)
+cmd-alt-ctrl-o = 'exec-and-forget open -a Obsidian'
+
+# Messages (Super + M)
+cmd-alt-ctrl-m = 'exec-and-forget open -a "Messages"'
+
+# ── Utilities (matches Omarchy utilities.conf) ──
+
+# Show keybindings (Super + /)
+cmd-alt-ctrl-slash = 'exec-and-forget open -na Ghostty.app --args -e $HOME/.config/aerospace/show-bindings.sh'
+
+# Reload config (Super + Shift + R)
+cmd-alt-ctrl-shift-r = 'reload-config'

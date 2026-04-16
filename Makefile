@@ -66,11 +66,19 @@ install-brew:
 		vivid \
 		zoxide \
 		\
+		btop \
+		lazydocker \
+		lazygit \
+		yazi \
+		\
 		actionlint \
 		shellcheck \
 		shfmt \
 		zizmor \
 		ast-grep \
+		\
+		tldr \
+		gum \
 		\
 		colima \
 		docker \
@@ -116,7 +124,7 @@ install-linux:
 			zsh git curl ca-certificates \
 			neovim tmux \
 			ripgrep fd-find fzf bat eza zoxide \
-			jq shellcheck; \
+			jq shellcheck btop; \
 		[ -e /usr/bin/fdfind ] && [ ! -e /usr/local/bin/fd ] && sudo ln -sf /usr/bin/fdfind /usr/local/bin/fd; \
 		[ -e /usr/bin/batcat ] && [ ! -e /usr/local/bin/bat ] && sudo ln -sf /usr/bin/batcat /usr/local/bin/bat; \
 	elif command -v dnf >/dev/null; then \
@@ -124,13 +132,14 @@ install-linux:
 			zsh git curl ca-certificates \
 			neovim tmux \
 			ripgrep fd-find fzf bat eza zoxide \
-			jq ShellCheck; \
+			jq ShellCheck lazygit btop; \
 	elif command -v pacman >/dev/null; then \
 		sudo pacman -Sy --noconfirm --needed \
 			zsh git curl ca-certificates \
 			neovim tmux \
 			ripgrep fd fzf bat eza zoxide \
-			jq shellcheck starship git-delta; \
+			jq shellcheck starship git-delta \
+			yazi lazygit lazydocker btop; \
 	else \
 		echo "Error: no supported package manager (apt/dnf/pacman) found"; exit 1; \
 	fi

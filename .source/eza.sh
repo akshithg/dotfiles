@@ -1,4 +1,5 @@
-# ls aliases — eza if available, fallback to ls
+# shellcheck shell=bash
+# eza — modern ls replacement, fallback to ls
 
 if command -v eza >/dev/null 2>&1; then
     alias ls="eza --group-directories-first"

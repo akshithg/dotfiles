@@ -24,15 +24,22 @@ config = tomllib.loads(Path(sys.argv[1]).read_text())
 
 labels = {
     'open -a Ghostty': 'open terminal',
+    'open -a \"Google Chrome Beta\"': 'open browser',
+    'open -na Ghostty.app --args -e nvim': 'open neovim',
+    'open -na Ghostty.app --args -e lazydocker': 'open lazydocker',
+    'open -a Slack': 'open slack',
+    'open -a Obsidian': 'open obsidian',
+    'open -a \"Messages\"': 'open messages',
     'close': 'close window',
-    'fullscreen': 'toggle fullscreen',
-    'layout floating tiling': 'toggle floating',
-    'layout tiles horizontal vertical': 'toggle split',
-    'mode resize': 'enter resize mode',
+    'fullscreen': 'fullscreen',
+    'layout floating tiling': 'toggle floating/tiling',
+    'layout tiles horizontal vertical': 'toggle split orientation',
+    'resize smart -50': 'shrink window',
+    'resize smart +50': 'expand window',
     'reload-config': 'reload config',
     'balance-sizes': 'balance sizes',
-    'workspace-back-and-forth': 'last workspace',
-    'mode main': 'exit mode',
+    'workspace next': 'next workspace',
+    'workspace prev': 'previous workspace',
 }
 
 def fmt_key(k):

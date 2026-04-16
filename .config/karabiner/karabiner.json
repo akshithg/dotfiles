@@ -87,11 +87,11 @@
                         ]
                     },
                     {
-                        "description": "Super + D = Spotlight (Cmd+Space)",
+                        "description": "Super + Space = Spotlight (Cmd+Space)",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "d",
+                                    "key_code": "spacebar",
                                     "modifiers": { "mandatory": ["right_command", "right_control", "right_option"] }
                                 },
                                 "to": [
