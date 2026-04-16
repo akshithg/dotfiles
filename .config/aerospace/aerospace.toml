@@ -43,7 +43,7 @@ preset = 'qwerty'
 
 # Auto-assign apps to workspaces
 # External monitor: 1=terminal, 2=browser, 3=editor, 4=AI, 5=research
-# Laptop: 6=comms, 7=google (gmail/calendar/drive)
+# Laptop: 6=comms, 7=google (gmail/calendar/drive), 8=personal (safari)
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
@@ -55,7 +55,7 @@ run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
-run = 'move-node-to-workspace 2'
+run = 'move-node-to-workspace 8'
 
 # Chrome PWA: Google Drive
 [[on-window-detected]]
