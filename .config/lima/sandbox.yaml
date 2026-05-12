@@ -1,0 +1,49 @@
+minimumLimaVersion: 2.0.0
+
+# Sandbox VM for running Claude Code in --dangerously-skip-permissions mode.
+# Blast radius is the VM itself plus whatever you mount writable below.
+# Host $HOME is intentionally NOT mounted.
+
+base:
+- template:_images/ubuntu-24.04
+
+vmType: "vz"
+
+cpus: 6
+memory: "16GiB"
+disk: "200GiB"
+
+mountType: "virtiofs"
+mountInotify: true
+
+# Per-project mounts. Add a project here, then `limactl stop sandbox && limactl start sandbox`.
+mounts: []
+# - location: "~/workspace/trailofbits/some-project"
+#   writable: true
+
+ssh:
+  loadDotSSHPubKeys: false
+
+provision:
+- mode: system
+  script: |
+    #!/bin/bash
+    set -euo pipefail
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install -y curl ca-certificates git build-essential ripgrep fd-find jq
+    ln -sf "$(command -v fdfind)" /usr/local/bin/fd
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+    apt-get install -y nodejs
+
+- mode: user
+  script: |
+    #!/bin/bash
+    set -euo pipefail
+    mkdir -p "$HOME/.npm-global"
+    npm config set prefix "$HOME/.npm-global"
+    if ! grep -q 'npm-global/bin' "$HOME/.profile"; then
+      echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> "$HOME/.profile"
+    fi
+    export PATH="$HOME/.npm-global/bin:$PATH"
+    npm install -g @anthropic-ai/claude-code
