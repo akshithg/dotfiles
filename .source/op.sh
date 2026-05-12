@@ -8,15 +8,15 @@ command -v op >/dev/null 2>&1 || return
 OP_ENV_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/op/env.tpl"
 [ -f "$OP_ENV_FILE" ] || return
 
-# Drop any stale aliases from previous shell state
-unalias claude 2>/dev/null
-
-# `function NAME { ... }` form bypasses alias expansion on the name at parse time
-function claude {
-    (
-        set -a
-        eval "$(op inject -i "$OP_ENV_FILE" 2>/dev/null)"
-        set +a
-        command claude "$@"
-    )
+# Wrap <cmd> so every invocation runs inside a subshell where env vars from
+# OP_ENV_FILE are resolved and exported. Using `function` form bypasses alias
+# expansion on the name at parse time.
+_op_wrap_cmd() {
+    local cmd="$1"
+    command -v "$cmd" >/dev/null 2>&1 || return
+    unalias "$cmd" 2>/dev/null
+    eval "function $cmd { (set -a; eval \"\$(op inject -i \"\$OP_ENV_FILE\" 2>/dev/null)\"; set +a; command $cmd \"\$@\") }"
 }
+
+_op_wrap_cmd claude
+_op_wrap_cmd s3cmd
