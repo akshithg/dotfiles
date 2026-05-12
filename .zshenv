@@ -50,3 +50,6 @@ export PATH="${PNPM_HOME}:${PATH}"
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
 export PYTHONUSERBASE="${XDG_DATA_HOME}/python"
 export PATH="${PYTHONUSERBASE}/bin:${PATH}"
+
+# colima (pin home so contexts without XDG_CONFIG_HOME don't fall back to ~/.colima)
+export COLIMA_HOME="${XDG_CONFIG_HOME}/colima"
