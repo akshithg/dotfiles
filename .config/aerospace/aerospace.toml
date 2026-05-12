@@ -29,7 +29,7 @@ outer.right = 8
 [key-mapping]
 preset = 'qwerty'
 
-# Workspaces 1-5 on external monitor, 6-9 on laptop
+# Workspaces 1-5 on external monitor, 6-9 + 0 on laptop
 [workspace-to-monitor-force-assignment]
 1 = 'main'
 2 = 'main'
@@ -40,10 +40,11 @@ preset = 'qwerty'
 7 = 'secondary'
 8 = 'secondary'
 9 = 'secondary'
+0 = 'secondary'
 
 # Auto-assign apps to workspaces
-# External monitor: 1=terminal, 2=browser, 3=editor, 4=AI, 5=research
-# Laptop: 6=comms, 7=google (gmail/calendar/drive), 8=personal (safari)
+# External monitor: 1=terminal, 2=chrome, 3=google (gmail/drive/cal), 4=editor, 5=research
+# Laptop: 8=AI, 9=safari, 0=comms (slack/discord)
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
@@ -55,20 +56,20 @@ run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
-run = 'move-node-to-workspace 8'
+run = 'move-node-to-workspace 9'
 
 # Chrome PWA: Google Drive
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome.beta.app.aghbiahbpaijignceidepookljebhfak'
-run = 'move-node-to-workspace 7'
-
-[[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
-if.app-id = 'com.anthropic.claudefordesktop'
+if.app-id = 'com.microsoft.VSCode'
 run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'move-node-to-workspace 8'
 
 [[on-window-detected]]
 if.app-id = 'org.zotero.zotero'
@@ -80,16 +81,16 @@ run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Slack'
-run = 'move-node-to-workspace 6'
+run = 'move-node-to-workspace 0'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Discord'
-run = 'move-node-to-workspace 6'
+run = 'move-node-to-workspace 0'
 
 # Chrome PWA: Gmail
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome.beta.app.fmgjjmmmlfnkbppncabfkddbjimcfncm'
-run = 'move-node-to-workspace 7'
+run = 'move-node-to-workspace 3'
 
 # Auto-float utility and communication apps
 [[on-window-detected]]
@@ -132,6 +133,27 @@ run = 'layout floating'
 if.app-id = 'com.apple.Passwords'
 run = 'layout floating'
 
+# Other Apple apps default to floating
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Notes'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.reminders'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Preview'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Maps'
+run = 'layout floating'
+
 [[on-window-detected]]
 if.app-name-regex-substring = '1Password'
 run = 'layout floating'
@@ -169,10 +191,15 @@ run = 'layout floating'
 if.app-id = 'com.google.Chrome.beta.app.kjgfgldnnfoeklkmfkjfagphfepbbdan'
 run = 'layout floating'
 
+# Safari Web App: YouTube Music
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari.WebApp.CF411474-2290-4422-94EE-646A08194376'
+run = 'layout floating'
+
 # Chrome PWA: Google Calendar
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome.beta.app.kjbdgfilnfhdoflbpgamdcdgpehopbep'
-run = 'move-node-to-workspace 7'
+run = 'move-node-to-workspace 3'
 
 [mode.main.binding]
 
@@ -209,7 +236,7 @@ cmd-alt-ctrl-shift-l = 'move right'
 cmd-alt-ctrl-minus = 'resize smart -50'
 cmd-alt-ctrl-equal = 'resize smart +50'
 
-# Switch workspaces (Super + 1-9)
+# Switch workspaces (Super + 0-9)
 cmd-alt-ctrl-1 = 'workspace 1'
 cmd-alt-ctrl-2 = 'workspace 2'
 cmd-alt-ctrl-3 = 'workspace 3'
@@ -219,8 +246,9 @@ cmd-alt-ctrl-6 = 'workspace 6'
 cmd-alt-ctrl-7 = 'workspace 7'
 cmd-alt-ctrl-8 = 'workspace 8'
 cmd-alt-ctrl-9 = 'workspace 9'
+cmd-alt-ctrl-0 = 'workspace 0'
 
-# Move window to workspace and follow (Super + Shift + 1-9)
+# Move window to workspace and follow (Super + Shift + 0-9)
 cmd-alt-ctrl-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
 cmd-alt-ctrl-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
 cmd-alt-ctrl-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
@@ -230,6 +258,7 @@ cmd-alt-ctrl-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
 cmd-alt-ctrl-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
 cmd-alt-ctrl-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 cmd-alt-ctrl-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+cmd-alt-ctrl-shift-0 = ['move-node-to-workspace 0', 'workspace 0']
 
 # Workspace navigation (Super + Tab/Shift+Tab/Ctrl+Tab, matches Omarchy v2)
 cmd-alt-ctrl-tab = 'workspace next'
