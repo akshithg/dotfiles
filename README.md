@@ -8,6 +8,7 @@ Bare git repo managing `$HOME` config files.
 .zshenv                     # XDG dirs, ZDOTDIR, env vars
 .config/
   bat/                      # syntax highlighting + catppuccin themes
+  dotfiles/                 # install/update/uninstall scripts run by the Makefile
   delta/                    # diff pager
   ghostty/                  # terminal
   git/config, ignore        # git config + global gitignore
@@ -20,7 +21,7 @@ Bare git repo managing `$HOME` config files.
   zsh/                      # shell config (zinit, completions, theme)
 .source/                    # modular shell scripts sourced by .zshrc
 .ssh/                       # ssh config, authorized_keys (keys are gitignored)
-Makefile                    # bootstrap and install targets
+Makefile                    # thin dispatch to bootstrap.sh and .config/dotfiles/*.sh
 ```
 
 ## Setup on a new machine
@@ -66,7 +67,7 @@ rm ~/README.md ~/.dockerignore
 Or use the Makefile:
 
 ```sh
-make clone              # clone bare repo + checkout + TPM
+make clone              # runs bootstrap.sh: clone + checkout + TPM
 make install            # brew + rust + python + node tools
 make install-brew       # homebrew + CLI tools
 make install-rust       # rustup + cargo tools (prek, cargo-deny, etc.)

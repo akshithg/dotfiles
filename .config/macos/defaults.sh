@@ -10,6 +10,11 @@ set -euo pipefail
 # - com.apple.dock no-glass (pre-Yosemite)
 # - com.apple.finder EmptyTrashSecurely (removed in 10.11 El Capitan)
 
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "Error: Not macOS" >&2
+  exit 1
+fi
+
 echo "==> Dock"
 defaults write com.apple.dock "orientation" -string "bottom"
 defaults write com.apple.dock "tilesize" -int "48"

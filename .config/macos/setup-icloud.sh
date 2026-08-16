@@ -4,6 +4,11 @@ set -euo pipefail
 # Link ~/Documents to iCloud Drive
 # This replaces the local Documents folder with a symlink to iCloud
 
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "Error: Not macOS" >&2
+  exit 1
+fi
+
 icloud_docs="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Documents"
 
 if [[ ! -d "$icloud_docs" ]]; then
