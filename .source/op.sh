@@ -19,4 +19,12 @@ _op_wrap_cmd() {
 }
 
 _op_wrap_cmd claude
+_op_wrap_cmd codex
 _op_wrap_cmd s3cmd
+
+# Run any command with the OP_ENV_FILE secrets resolved into its environment.
+# The per-command wrappers above only cover direct interactive calls; a script
+# (make, ./foo.sh) that shells out to a wrapped tool in a subprocess never sees
+# them. `opx <cmd>` injects the env once for the whole process tree, so those
+# nested calls inherit the secrets. E.g. `opx make dataset-status`.
+opx() { (set -a; eval "$(op inject -i "$OP_ENV_FILE" 2>/dev/null)"; set +a; "$@") }
