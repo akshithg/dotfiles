@@ -69,3 +69,7 @@ Temporary Items
 .Trash-*
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+
+**/.claude/settings.local.json
+
+**/.claude/.cc-writes/
