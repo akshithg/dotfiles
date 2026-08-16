@@ -34,11 +34,33 @@ git clone --bare git@github.com:akshithg/dotfiles.git $HOME/.dotfiles
 # alias for this session
 alias dotgit='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+# keep repo-only files out of $HOME (they stay tracked in git)
+dotgit config --local core.sparseCheckout true
+printf '/*\n!/README.md\n!/CLAUDE.md\n!/.dockerignore\n!/test\n' \
+    > $HOME/.dotfiles/info/sparse-checkout
+
 # back up any conflicting files, then checkout
 mkdir -p ~/.config-backup
 dotgit checkout 2>&1 | grep -E "^\s" | awk '{print $1}' | xargs -I{} mv {} ~/.config-backup/{}
 dotgit checkout
 dotgit config --local status.showUntrackedFiles no
+```
+
+`README.md`, `CLAUDE.md`, `.dockerignore`, and `test/` describe the repo, not the
+machine, so sparse-checkout skips them. `dotgit status` stays clean instead of
+reporting them deleted, and `dotgit add -A` will not stage their removal. The
+list lives in `bootstrap.sh`; `uninstall.sh` reads it back out of the repo's
+own `info/sparse-checkout`.
+
+If `$HOME` already held a file with one of those names, `dotgit status` shows it
+as modified — git refuses to set skip-worktree on a file whose content differs.
+Cosmetic only: `add -A` still won't stage it.
+
+On a machine that is already set up, apply it by hand:
+
+```sh
+dotgit update-index --skip-worktree README.md CLAUDE.md .dockerignore test/*
+rm ~/README.md ~/.dockerignore
 ```
 
 Or use the Makefile:
