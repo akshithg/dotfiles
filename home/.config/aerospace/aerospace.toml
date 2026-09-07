@@ -80,10 +80,6 @@ cmd-alt-ctrl-shift-period = 'move-node-to-monitor next'
 # Launchers
 cmd-alt-ctrl-space = 'exec-and-forget open /System/Library/CoreServices/Spotlight.app'
 cmd-alt-ctrl-enter = 'exec-and-forget open -a Ghostty'
-cmd-alt-ctrl-b = 'exec-and-forget open -a "Google Chrome Beta"'
-cmd-alt-ctrl-g = 'exec-and-forget open -a Slack'
-cmd-alt-ctrl-o = 'exec-and-forget open -a Obsidian'
-cmd-alt-ctrl-m = 'exec-and-forget open -a Messages'
 
 # Help
 cmd-alt-ctrl-k = 'exec-and-forget open -na Ghostty.app --args -e $HOME/.config/aerospace/show-bindings.sh'
