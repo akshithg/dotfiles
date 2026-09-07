@@ -1,73 +1,25 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 set -euo pipefail
-
-# Float and center this window once it's registered by AeroSpace
-(sleep 0.3 && aerospace layout floating && sleep 0.1 && osascript -e '
-use framework "AppKit"
-set scr to current application'\''s NSScreen'\''s mainScreen()'\''s frame()
-set sw to item 1 of item 2 of scr as integer
-set sh to item 2 of item 2 of scr as integer
-set w to 800
-set h to 500
-tell application "System Events" to tell (first process whose frontmost is true)
-    set size of window 1 to {w, h}
-    set position of window 1 to {(sw - w) / 2, (sh - h) / 2}
-end tell') &
 
 config="${XDG_CONFIG_HOME:-$HOME/.config}/aerospace/aerospace.toml"
 
-uv run python3 -c "
-import tomllib, sys
-from pathlib import Path
+# The binding table intentionally uses one TOML assignment per line.
+awk '
+  /^\[mode\.main\.binding\]$/ { in_bindings = 1; next }
+  /^\[/ && in_bindings { exit }
+  in_bindings && /^[[:alnum:]-]+[[:space:]]*=/ {
+    separator = index($0, " = ")
+    key = substr($0, 1, separator - 1)
+    action = substr($0, separator + 3)
 
-config = tomllib.loads(Path(sys.argv[1]).read_text())
-
-labels = {
-    'open -a Ghostty': 'open terminal',
-    'open -a \"Google Chrome Beta\"': 'open browser',
-    'open -na Ghostty.app --args -e nvim': 'open neovim',
-    'open -na Ghostty.app --args -e lazydocker': 'open lazydocker',
-    'open -a Slack': 'open slack',
-    'open -a Obsidian': 'open obsidian',
-    'open -a \"Messages\"': 'open messages',
-    'close': 'close window',
-    'fullscreen': 'fullscreen',
-    'layout floating tiling': 'toggle floating/tiling',
-    'layout tiles horizontal vertical': 'toggle split orientation',
-    'resize smart -50': 'shrink window',
-    'resize smart +50': 'expand window',
-    'reload-config': 'reload config',
-    'balance-sizes': 'balance sizes',
-    'workspace next': 'next workspace',
-    'workspace prev': 'previous workspace',
-}
-
-def fmt_key(k):
-    k = k.replace('cmd-alt-ctrl-shift', 'Super+Shift')
-    k = k.replace('cmd-alt-ctrl', 'Super')
-    return k.replace('-', '+')
-
-def fmt_action(a):
-    if isinstance(a, list):
-        a = ', '.join(a)
-    for prefix in ['exec-and-forget ']:
-        a = a.replace(prefix, '')
-    if 'osascript' in a:
-        return 'spotlight'
-    if 'show-bindings' in a:
-        return 'show keybindings'
-    if 'move-node-to-workspace' in a and 'workspace' in a:
-        ws = a.split('move-node-to-workspace ')[1].split(',')[0].strip()
-        return f'move to workspace {ws} (follow)'
-    return labels.get(a, a)
-
-for mode_name, mode in config.get('mode', {}).items():
-    for key, action in mode.get('binding', {}).items():
-        k = fmt_key(key)
-        if mode_name != 'main':
-            k = f'[{mode_name}] {k}'
-        print(f'{k:<28}  {fmt_action(action)}')
-" "$config" | fzf --no-sort --layout=reverse \
-    --prompt="search: " \
-    --header="AeroSpace Keybindings  (Esc to close)" \
-    --header-first
+    sub(/^cmd-alt-ctrl-shift-/, "Super+Shift+", key)
+    sub(/^cmd-alt-ctrl-/, "Super+", key)
+    gsub(/-/, "+", key)
+    printf "%-24s %s\n", key, action
+  }
+' "$config" | fzf \
+  --no-sort \
+  --layout=reverse \
+  --prompt="search: " \
+  --header="AeroSpace keybindings (Esc to close)" \
+  --header-first
