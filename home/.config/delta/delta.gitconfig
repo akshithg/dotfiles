@@ -9,5 +9,5 @@
     line-numbers = true
     navigate = true
     side-by-side = false
-    syntax-theme = Catppuccin Mocha
-    true-color = always
+    detect-dark-light = auto
+    syntax-theme = ansi

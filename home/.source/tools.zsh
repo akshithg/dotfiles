@@ -1,15 +1,15 @@
 # Interactive tool initialization
 
-export BAT_THEME='Catppuccin Mocha'
+unset BAT_THEME BAT_THEME_LIGHT BAT_THEME_DARK
 
 if command -v vivid >/dev/null 2>&1; then
-  export LS_COLORS="$(vivid generate "${XDG_CONFIG_HOME}/vivid/themes/catppuccin-mocha.yml")"
+  export LS_COLORS="$(vivid --color-mode 8-bit generate ansi)"
 fi
 
 export FZF_DEFAULT_OPTS="--height 60%
   --border rounded
   --layout reverse
-  --color bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8,fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc,marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
+  --color 16
   --prompt '∷ '
   --pointer ▶
   --marker ⇒"

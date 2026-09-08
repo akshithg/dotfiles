@@ -4,7 +4,11 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = "mocha",
+      flavour = "auto",
+      background = {
+        light = "frappe",
+        dark = "mocha",
+      },
       transparent_background = true,
       integrations = {
         cmp = true,
