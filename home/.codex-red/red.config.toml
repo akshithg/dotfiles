@@ -1,0 +1,14 @@
+model = "gpt-daybreak-red-latest"
+model_catalog_json = "/Users/akshithg/.codex-red/models/daybreak.json"
+model_reasoning_effort = "xhigh"
+model_provider = "openai-ptp"
+
+[model_providers.openai-ptp]
+name = "OpenAI PTP"
+base_url = "https://api.openai.com/v1"
+wire_api = "responses"
+
+[model_providers.openai-ptp.auth]
+command = "/opt/homebrew/bin/op"
+args = ["item", "get", "OPENAI_PTP_API_KEY", "--fields", "password", "--reveal"]
+timeout_ms = 60000

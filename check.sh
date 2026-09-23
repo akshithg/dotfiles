@@ -40,6 +40,7 @@ for path in (
     root / "home/.config/aerospace/aerospace.toml",
     root / "home/.config/herdr/config.toml",
     root / "home/.config/starship.toml",
+    root / "home/.codex-red/red.config.toml",
 ):
     tomllib.loads(path.read_text())
 PY
