@@ -28,8 +28,9 @@ of the way and run the script again.
 - `install.sh` installs and links the configuration.
 - `check.sh` validates shell, JSON, and TOML files.
 
-Ghostty follows macOS appearance using Catppuccin Frappé for light mode and
-Mocha for dark mode. Terminal tools inherit the active palette where supported.
+Ghostty follows macOS appearance using Catppuccin Latte for light mode and
+Mocha for dark mode. Herdr switches with the terminal appearance; other terminal
+tools inherit the active palette where supported.
 Machine-specific settings belong in the untracked `~/.zshrc.local` file.
 
 ## Common commands

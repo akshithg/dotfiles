@@ -6,7 +6,7 @@ return {
     opts = {
       flavour = "auto",
       background = {
-        light = "frappe",
+        light = "latte",
         dark = "mocha",
       },
       transparent_background = true,

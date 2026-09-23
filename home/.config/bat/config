@@ -1,6 +1,6 @@
 # Follow the macOS appearance.
 --theme="auto:system"
---theme-light="Catppuccin Frappe"
+--theme-light="Catppuccin Latte"
 --theme-dark="Catppuccin Mocha"
 
 # Show line numbers, Git modifications and file header (but no grid)

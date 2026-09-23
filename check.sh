@@ -38,6 +38,7 @@ import tomllib
 root = pathlib.Path(sys.argv[1])
 for path in (
     root / "home/.config/aerospace/aerospace.toml",
+    root / "home/.config/herdr/config.toml",
     root / "home/.config/starship.toml",
 ):
     tomllib.loads(path.read_text())
