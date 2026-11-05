@@ -3,3 +3,5 @@ home/.config/op/*.env
 home/.codex/
 home/.codex-red/
 home/.ssh/authorized_keys
+home/.ssh/allowed_signers
+home/.ssh/config.d/local.conf

@@ -29,26 +29,18 @@ For other package managers, run:
 `install-tools.sh` accepts any subset of `cargo`, `uv`, and `pnpm`; package lists
 are in `tools/`.
 
-## SSH access
+## Git and SSH
 
-To replace the local `~/.ssh/authorized_keys` with the public keys currently on
-the `akshithg` GitHub account, run:
+Set your Git identity and signing key in a machine-local `~/.gitconfig`. Put
+host-specific SSH agent and key choices in `~/.ssh/config.d/local.conf`. The
+shared dotfiles do not choose an SSH key provider.
 
-```sh
-./setup-authorized-keys.sh
+For example, to use an SSH agent for GitHub, add this to `local.conf` and
+replace the socket path with the one for that Mac:
+
+```sshconfig
+Host github.com
+    IdentityAgent "/path/to/agent.sock"
 ```
 
-This is a separate setup step. It does not run during `./install.sh`.
-
-## Git signing
-
-Git uses 1Password signing when available. Otherwise, it announces and uses a
-local SSH key. Set up that key on machines that need it:
-
-```sh
-./setup-fallback-signing.sh
-```
-
-Add `~/.ssh/git_signing_fallback_ed25519.pub` to GitHub as a signing key. The
-script also adds it to the tracked `home/.ssh/allowed_signers` file; review that
-change before committing.
+For a local or hardware key, use `IdentityFile ~/.ssh/your_key` instead.

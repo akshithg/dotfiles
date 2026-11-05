@@ -53,9 +53,7 @@
 	insteadOf = bb://
 
 [user]
-	name = Akshith Gunasekaran
-	email = akshithg@users.noreply.github.com
-	signingkey = ~/.ssh/id_ed25519.pub
+	useConfigOnly = true
 
 [pull]
 	ff = only
@@ -65,19 +63,6 @@
 
 [rebase]
 	autoStash = true
-
-[gpg]
-	format = ssh
-
-[gpg "ssh"]
-	program = git-ssh-sign
-	allowedSignersFile = ~/.ssh/allowed_signers
-
-[commit]
-	gpgsign = true
-
-[tag]
-	gpgsign = true
 
 # https://groups.google.com/g/binary-transparency/c/f-BI4o8HZW0
 [transfer]

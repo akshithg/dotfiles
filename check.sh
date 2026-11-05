@@ -6,9 +6,6 @@ repo_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 shellcheck \
   "$repo_dir/install.sh" \
   "$repo_dir/install-tools.sh" \
-  "$repo_dir/setup-authorized-keys.sh" \
-  "$repo_dir/setup-fallback-signing.sh" \
-  "$repo_dir/home/.local/bin/git-ssh-sign" \
   "$repo_dir/check.sh" \
   "$repo_dir/home/.config/macos/defaults.sh" \
   "$repo_dir/home/.config/macos/setup-icloud.sh"
@@ -16,9 +13,6 @@ shellcheck \
 shfmt -d -i 2 -ci \
   "$repo_dir/install.sh" \
   "$repo_dir/install-tools.sh" \
-  "$repo_dir/setup-authorized-keys.sh" \
-  "$repo_dir/setup-fallback-signing.sh" \
-  "$repo_dir/home/.local/bin/git-ssh-sign" \
   "$repo_dir/check.sh" \
   "$repo_dir/home/.config/macos/defaults.sh" \
   "$repo_dir/home/.config/macos/setup-icloud.sh"

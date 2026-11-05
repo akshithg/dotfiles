@@ -66,9 +66,3 @@ command -v wt >/dev/null 2>&1 && eval "$(command wt config shell init zsh)"
 
 export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship.toml"
 command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
-
-if [[ "$OSTYPE" == darwin* ]]; then
-  _op_socket="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-  [[ -S "$_op_socket" ]] && export SSH_AUTH_SOCK="$_op_socket"
-  unset _op_socket
-fi
