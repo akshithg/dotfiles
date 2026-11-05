@@ -28,7 +28,7 @@ if command -v fzf >/dev/null 2>&1; then
   fi
 
   export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND:-}"
-  export FZF_COMPLETION_DIR_COMMANDS='cd pushd rmdir tree ls eza'
+  export FZF_COMPLETION_DIR_COMMANDS='cd pushd rmdir ls eza'
   export FZF_CTRL_T_OPTS="--walker-skip .git,node_modules,target
     --preview 'bat -n --color=always {}'
     --bind 'ctrl-/:change-preview-window(down|hidden|)'"

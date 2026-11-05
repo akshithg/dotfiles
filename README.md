@@ -4,7 +4,7 @@ macOS CLI setup managed with GNU Stow.
 
 ## Install
 
-Install [Homebrew](https://brew.sh), then run:
+Install [Homebrew](https://brew.sh), then clone the repository:
 
 ```sh
 git clone git@github.com:akshithg/dotfiles.git ~/.dotfiles
@@ -12,17 +12,17 @@ cd ~/.dotfiles
 ./install.sh
 ```
 
-This installs the default `Brewfile`, Rust stable, Node.js 22, and the files in
-`home/`. Resolve any Stow conflicts and rerun the installer.
+The command lists available groups without changing anything. Run
+`./install.sh core` for all formulas and dotfiles; resolve any Stow conflicts
+and rerun it. Run `./install.sh cask` for optional apps and fonts. Run
+`./install.sh defaults` to apply macOS and app preferences; it restarts affected
+apps.
 
 ## Optional tools
 
-Run the commands for the groups you want. GUI apps are in `Brewfile.gui`.
+For other package managers, run:
 
 ```sh
-brew bundle --file=Brewfile.shell --no-upgrade
-brew bundle --file=Brewfile.dev --no-upgrade
-brew bundle --file=Brewfile.gui --no-upgrade
 ./install-tools.sh cargo uv pnpm
 ```
 
