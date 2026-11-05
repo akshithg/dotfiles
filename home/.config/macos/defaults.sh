@@ -99,11 +99,32 @@ defaults write NSGlobalDomain "NSQuitAlwaysKeepsWindows" -bool false
 defaults write NSGlobalDomain "com.apple.mouse.linear" -bool true
 
 echo "==> Trackpad"
-defaults write com.apple.AppleMultitouchTrackpad "Clicking" -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad "Clicking" -bool true
+for domain in com.apple.AppleMultitouchTrackpad com.apple.driver.AppleBluetoothMultitouch.trackpad; do
+  defaults write "$domain" "Clicking" -bool true
+  defaults write "$domain" "Dragging" -bool false
+  defaults write "$domain" "DragLock" -bool false
+  defaults write "$domain" "TrackpadThreeFingerDrag" -bool false
+  defaults write "$domain" "TrackpadRightClick" -bool true
+  defaults write "$domain" "TrackpadCornerSecondaryClick" -int 0
+  defaults write "$domain" "TrackpadScroll" -bool true
+  defaults write "$domain" "TrackpadHorizScroll" -int 1
+  defaults write "$domain" "TrackpadMomentumScroll" -bool true
+  defaults write "$domain" "TrackpadPinch" -int 1
+  defaults write "$domain" "TrackpadRotate" -int 1
+  defaults write "$domain" "TrackpadTwoFingerDoubleTapGesture" -int 1
+  defaults write "$domain" "TrackpadTwoFingerFromRightEdgeSwipeGesture" -int 3
+  defaults write "$domain" "TrackpadThreeFingerHorizSwipeGesture" -int 2
+  defaults write "$domain" "TrackpadThreeFingerVertSwipeGesture" -int 2
+  defaults write "$domain" "TrackpadThreeFingerTapGesture" -int 2
+  defaults write "$domain" "TrackpadFourFingerHorizSwipeGesture" -int 2
+  defaults write "$domain" "TrackpadFourFingerVertSwipeGesture" -int 2
+  defaults write "$domain" "TrackpadFourFingerPinchGesture" -int 2
+  defaults write "$domain" "TrackpadFiveFingerPinchGesture" -int 2
+done
 defaults write NSGlobalDomain "com.apple.mouse.tapBehavior" -int 1
-defaults write com.apple.AppleMultitouchTrackpad "TrackpadThreeFingerDrag" -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad "TrackpadThreeFingerDrag" -bool true
+defaults write NSGlobalDomain "AppleEnableSwipeNavigateWithScrolls" -bool true
+defaults write NSGlobalDomain "com.apple.trackpad.forceClick" -bool false
+defaults write NSGlobalDomain "com.apple.trackpad.scaling" -float 2.5
 
 echo "==> Desktop Services"
 defaults write com.apple.desktopservices "DSDontWriteNetworkStores" -bool true
